@@ -19,7 +19,7 @@ namespace SuperAdventure
         public SuperAdventure()
         {
             InitializeComponent();
-            /*
+            
             if (File.Exists(PLAYER_DATA_FILE_NAME))
             {
                 player = Player.CreatePlayerFromXMLString(File.ReadAllText(PLAYER_DATA_FILE_NAME));
@@ -28,8 +28,8 @@ namespace SuperAdventure
             {
                 player = Player.createDefaultPlayer();
             }
-            */
-            player = Player.createDefaultPlayer();
+            
+            //player = Player.createDefaultPlayer();
             setUp();
             /*
             lblHitPoints.DataBindings.Add("Text", player, "currentHitPoints");
@@ -223,8 +223,7 @@ namespace SuperAdventure
         {
             Weapon currentWeapon = (Weapon)cboWeapons.SelectedItem;
             player.useWeapon(currentWeapon);
-            //monsterTurn();  
-            player.currentMonster.createMessage();         
+            //monsterTurn();        
         }
         private void btnTrade_Click(object sender, EventArgs e)
         {
@@ -232,9 +231,6 @@ namespace SuperAdventure
             tradingScreen.StartPosition = FormStartPosition.CenterParent;
             tradingScreen.ShowDialog(this);
         }
-        
-        
-        
         private void btnUsePotion_Click(object sender, EventArgs e)
         {
             HealingPotion hp = (HealingPotion)cboPotions.SelectedItem;
@@ -351,7 +347,6 @@ namespace SuperAdventure
         {
             clearBindings();
             this.player = Player.createDefaultPlayer();
-            
             setUp();
             //Application.Restart();
         }
@@ -362,7 +357,14 @@ namespace SuperAdventure
             lblExpierence.DataBindings.Clear();
             lblLevel.DataBindings.Clear();
             rtbMessages.Clear();
+            
+            dgvInventory.DataSource = null;
             dgvInventory.Rows.Clear();
+            dgvInventory.Columns.Clear();
+
+            dgvQuests.DataSource = null;
+            dgvQuests.Rows.Clear();
+            dgvQuests.Columns.Clear();
         }
         private void mnuItmOpen_Click(object sender, EventArgs e)
         {       
@@ -372,9 +374,20 @@ namespace SuperAdventure
             openFD.Filter = "XML|*.xml";
             openFD.ShowDialog();
             clearBindings();
-            this.player = Player.CreatePlayerFromXMLString(openFD.FileName);
-            
+            player = Player.CreatePlayerFromXMLString(File.ReadAllText(openFD.FileName));
             setUp();
+        }
+
+        private void mnuItmSave_Click(object sender, EventArgs e)
+        {
+            File.WriteAllText(PLAYER_DATA_FILE_NAME, player.toXMLString());
+            rtbMessages.Text += "\nFile has been saved.\n";
+        }
+
+        private void mnuItmClose_Click(object sender, EventArgs e)
+        {
+            File.WriteAllText(PLAYER_DATA_FILE_NAME, player.toXMLString());
+            Application.Exit();
         }
     }
 }

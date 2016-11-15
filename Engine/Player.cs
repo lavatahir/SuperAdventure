@@ -105,9 +105,12 @@ namespace Engine
                 }
                 return player;
             }
-            catch
+            catch (Exception e)
             {
-                return Player.createDefaultPlayer();
+                System.Diagnostics.Debug.WriteLine("Exception souce: {0}", e);
+                Console.WriteLine("Exception souce: {0}", e);
+                return Player.createDefaultPlayer(); ;
+                
             }
         }
         

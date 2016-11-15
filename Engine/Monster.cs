@@ -25,9 +25,5 @@ namespace Engine
             this.rewardGold = rewardGold;
             lootTable = new List<LootItem>();
         }
-        public void createMessage()
-        {
-            RaiseMessage("this is a test message from the monster");
-        }
     }
 }

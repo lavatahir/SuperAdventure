@@ -323,6 +323,7 @@ namespace SuperAdventure
             this.mnuItmSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.mnuItmSave.Size = new System.Drawing.Size(152, 22);
             this.mnuItmSave.Text = "&Save";
+            this.mnuItmSave.Click += new System.EventHandler(this.mnuItmSave_Click);
             // 
             // mnuItmClose
             // 
@@ -330,6 +331,7 @@ namespace SuperAdventure
             this.mnuItmClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.mnuItmClose.Size = new System.Drawing.Size(152, 22);
             this.mnuItmClose.Text = "&Close";
+            this.mnuItmClose.Click += new System.EventHandler(this.mnuItmClose_Click);
             // 
             // openFD
             // 
